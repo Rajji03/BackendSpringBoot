@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name="employee")
 public class Employee {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String firstName;
     private String secondName;
@@ -15,12 +15,11 @@ public class Employee {
     private int age;
     private String Department;
 
-    @OneToOne(mappedBy = "employee")
-    private Assets assets;
-    public Employee() {
-    }
+    @OneToOne(mappedBy = "employee",cascade = CascadeType.ALL)
 
-    public Employee(int id, String firstName, String secondName, String email, String city, int age, String department) {
+    private Assets assets;
+
+    public Employee(int id, String firstName, String secondName, String email, String city, int age, String department, Assets assets) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -28,6 +27,10 @@ public class Employee {
         this.city = city;
         this.age = age;
         Department = department;
+        this.assets = assets;
+    }
+
+    public Employee() {
     }
 
     public int getId() {
@@ -84,5 +87,13 @@ public class Employee {
 
     public void setDepartment(String department) {
         Department = department;
+    }
+
+    public Assets getAssets() {
+        return assets;
+    }
+
+    public void setAssets(Assets assets) {
+        this.assets = assets;
     }
 }

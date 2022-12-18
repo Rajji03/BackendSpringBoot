@@ -4,20 +4,18 @@ package com.learning.backend.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name="assets")
 public class Assets {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int assestId;
     private String laptopName;
     private String laptopId;
     private String chargerId;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="assets")
+    @OneToOne
+    @JoinColumn(name="employee_id")
     private Employee employee;
-
-    public Assets() {
-    }
 
     public Assets(int assestId, String laptopName, String laptopId, String chargerId, Employee employee) {
         this.assestId = assestId;
@@ -25,6 +23,9 @@ public class Assets {
         this.laptopId = laptopId;
         this.chargerId = chargerId;
         this.employee = employee;
+    }
+
+    public Assets() {
     }
 
     public int getAssestId() {
